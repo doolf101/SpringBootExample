@@ -1,0 +1,15 @@
+package com.ciaran.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+public class PageController {
+
+	@RequestMapping
+	public String getPage(Model model){
+		model.addAttribute("modelPram","This is text from the server");
+		return "page";
+	}
+}
