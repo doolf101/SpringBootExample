@@ -1,4 +1,4 @@
-package com.ciaran.domain;
+package com.doolf101.domain;
 
 public class Main {
 

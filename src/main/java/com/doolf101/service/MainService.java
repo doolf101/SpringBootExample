@@ -1,7 +1,7 @@
-package com.ciaran.service;
+package com.doolf101.service;
 
-import com.ciaran.domain.Main;
-import com.ciaran.repository.MainRepository;
+import com.doolf101.domain.Main;
+import com.doolf101.repository.MainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

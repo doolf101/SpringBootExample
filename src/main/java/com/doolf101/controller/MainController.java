@@ -1,8 +1,8 @@
-package com.ciaran.controller;
+package com.doolf101.controller;
 
 
-import com.ciaran.domain.Main;
-import com.ciaran.service.MainService;
+import com.doolf101.domain.Main;
+import com.doolf101.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

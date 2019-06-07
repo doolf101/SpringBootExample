@@ -1,4 +1,4 @@
-package com.ciaran.app;
+package com.doolf101.app;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.startup.Tomcat;
@@ -16,7 +16,7 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.ciaran"} )
+@ComponentScan(basePackages = { "com.doolf101"} )
 public class Application {
 
 	public static void main(String[] args){

@@ -1,6 +1,6 @@
-package com.ciaran.repository;
+package com.doolf101.repository;
 
-import com.ciaran.domain.Main;
+import com.doolf101.domain.Main;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package com.ciaran.repository;
+package com.doolf101.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
