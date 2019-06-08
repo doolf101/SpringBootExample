@@ -1,8 +1,8 @@
-package com.doolf101.controller;
+package com.doolf101.app.controller;
 
 
-import com.doolf101.domain.Main;
-import com.doolf101.service.MainService;
+import com.doolf101.app.domain.Main;
+import com.doolf101.app.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;

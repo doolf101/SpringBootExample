@@ -1,7 +1,7 @@
-package com.doolf101.service;
+package com.doolf101.app.service;
 
-import com.doolf101.domain.Main;
-import com.doolf101.repository.MainRepository;
+import com.doolf101.app.domain.Main;
+import com.doolf101.app.repository.MainRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

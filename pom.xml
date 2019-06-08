@@ -69,11 +69,16 @@
             <artifactId>tomcat-dbcp</artifactId>
             <version>8.5.4</version>
         </dependency>
-        <!-- END MySQL -->
+
 
         <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

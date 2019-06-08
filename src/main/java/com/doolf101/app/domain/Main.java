@@ -1,4 +1,4 @@
-package com.doolf101.domain;
+package com.doolf101.app.domain;
 
 public class Main {
 

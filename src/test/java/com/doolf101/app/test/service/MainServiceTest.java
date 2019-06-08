@@ -1,7 +1,7 @@
-package com.ciaran.test.service;
+package com.doolf101.app.test.service;
 
 
-import com.doolf101.domain.Main;
+import com.doolf101.app.domain.Main;
 import org.junit.jupiter.api.Test;
 
 

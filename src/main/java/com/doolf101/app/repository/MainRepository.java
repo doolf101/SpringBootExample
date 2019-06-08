@@ -1,6 +1,6 @@
-package com.doolf101.repository;
+package com.doolf101.app.repository;
 
-import com.doolf101.domain.Main;
+import com.doolf101.app.domain.Main;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
