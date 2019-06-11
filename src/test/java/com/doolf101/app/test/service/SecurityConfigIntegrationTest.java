@@ -34,7 +34,7 @@ public class SecurityConfigIntegrationTest {
 
 	@Test
 	public void whenLoggedUserRequestsHomePage_ThenSuccess() throws IllegalStateException {
-		restTemplate = new TestRestTemplate("user", "password");
+		restTemplate = new TestRestTemplate("priya", "priya");
 		ResponseEntity<String> response = restTemplate.getForEntity(base.toString(), String.class);
 		System.out.println(response.getStatusCode());
 		assertEquals(HttpStatus.OK, response.getStatusCode());

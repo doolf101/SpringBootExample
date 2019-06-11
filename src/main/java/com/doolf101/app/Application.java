@@ -12,6 +12,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatWebServer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jndi.JndiObjectFactoryBean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -58,6 +59,11 @@ public class Application {
 		bean.setLookupOnStartup(false);
 		bean.afterPropertiesSet();
 		return (DataSource)bean.getObject();
+	}
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
 	}
 
 }
