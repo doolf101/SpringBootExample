@@ -18,4 +18,9 @@ public class PageController {
 		return "testtwo";
 	}
 
+	@RequestMapping("login")
+	public String login(){
+		return "login";
+	}
+
 }

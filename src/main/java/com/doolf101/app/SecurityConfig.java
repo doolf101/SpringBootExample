@@ -6,9 +6,21 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.sql.DataSource;
+import java.io.IOException;
 
 @Configuration
 @EnableWebSecurity
@@ -43,10 +55,56 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
+				.csrf().disable()
 				.authorizeRequests()
+				.antMatchers("/").permitAll()
+				.antMatchers("/login").anonymous()
+				.antMatchers("/main").hasRole("ADMIN")
 				.anyRequest()
 				.authenticated()
 				.and()
+				.formLogin()
+				.loginPage("/login")
+				.failureHandler(failureHandler())
+				.successHandler(successHandle())
+				.defaultSuccessUrl("/page")
+				.and()
+				.logout()
+				.logoutSuccessHandler(logoutSuccessHandler())
+				.logoutUrl("/logout")
+				.logoutSuccessUrl("/")
+				.and()
 				.httpBasic();
 	}
+
+	private AuthenticationSuccessHandler successHandle() {
+		return new SimpleUrlAuthenticationSuccessHandler() {
+			@Override
+			public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+				System.out.println("successHandle");
+				super.onAuthenticationSuccess(request, response, authentication);
+			}
+		};
+	}
+
+	private AuthenticationFailureHandler failureHandler() {
+		return new SimpleUrlAuthenticationFailureHandler() {
+			@Override
+			public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
+				System.out.println("failureHandler");
+				super.onAuthenticationFailure(request, response, e);
+			}
+		};
+	}
+
+	private LogoutSuccessHandler logoutSuccessHandler() {
+		return new SimpleUrlLogoutSuccessHandler() {
+			@Override
+			public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+				System.out.println("logoutSuccessHandler");
+				super.onLogoutSuccess(request,response,authentication);
+			}
+		};
+	}
+
 }
