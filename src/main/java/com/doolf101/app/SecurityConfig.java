@@ -59,19 +59,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.authorizeRequests()
 				.antMatchers("/").permitAll()
 				.antMatchers("/login").anonymous()
+				.antMatchers("/logout").hasAnyAuthority()
 				.antMatchers("/main").hasRole("ADMIN")
+				.antMatchers("/page").hasRole("ADMIN")
 				.anyRequest()
 				.authenticated()
 				.and()
 				.formLogin()
 				.loginPage("/login")
+				.loginProcessingUrl("/login")
 				.failureHandler(failureHandler())
 				.successHandler(successHandle())
 				.defaultSuccessUrl("/page")
+				.failureForwardUrl("/login")
 				.and()
 				.logout()
-				.logoutSuccessHandler(logoutSuccessHandler())
+				.invalidateHttpSession(true)
 				.logoutUrl("/logout")
+				.logoutSuccessHandler(logoutSuccessHandler())
 				.logoutSuccessUrl("/")
 				.and()
 				.httpBasic();
@@ -82,17 +87,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			@Override
 			public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 				System.out.println("successHandle");
+				System.out.println(authentication.getAuthorities());
 				super.onAuthenticationSuccess(request, response, authentication);
 			}
 		};
 	}
 
 	private AuthenticationFailureHandler failureHandler() {
-		return new SimpleUrlAuthenticationFailureHandler() {
+		return new SimpleUrlAuthenticationFailureHandler(){
 			@Override
-			public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
+			public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,AuthenticationException exception)throws IOException, ServletException {
 				System.out.println("failureHandler");
-				super.onAuthenticationFailure(request, response, e);
+				super.onAuthenticationFailure(request, response, exception);
 			}
 		};
 	}

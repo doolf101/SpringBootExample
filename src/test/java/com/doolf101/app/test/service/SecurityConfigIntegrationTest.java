@@ -29,7 +29,7 @@ public class SecurityConfigIntegrationTest {
 
 	@Before
 	public void setUp() throws MalformedURLException {
-		base = new URL("http://localhost:" + port);
+		base = new URL("http://localhost:" + port+"/page");
 	}
 
 	@Test
@@ -37,9 +37,9 @@ public class SecurityConfigIntegrationTest {
 		restTemplate = new TestRestTemplate("priya", "priya");
 		ResponseEntity<String> response = restTemplate.getForEntity(base.toString(), String.class);
 		System.out.println(response.getStatusCode());
-		assertEquals(HttpStatus.OK, response.getStatusCode());
 		System.out.println(response.getBody());
-		assertTrue(response.getBody().contains("Welcome"));
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertTrue(response.getBody().contains("Thymeleaf Example"));
 	}
 
 	@Test
@@ -47,7 +47,9 @@ public class SecurityConfigIntegrationTest {
 		restTemplate = new TestRestTemplate("user", "wrongpassword");
 		ResponseEntity<String> response = restTemplate.getForEntity(base.toString(), String.class);
 		System.out.println(response.getStatusCode());
-		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+		System.out.println(response.getBody());
+		assertEquals(HttpStatus.OK, response.getStatusCode());
+		assertTrue(response.getBody().contains("Please sign in"));
 	}
 
 }

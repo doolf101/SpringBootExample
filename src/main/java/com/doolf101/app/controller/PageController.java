@@ -7,20 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class PageController {
 
-	@RequestMapping("page")
+	@RequestMapping("/page")
 	public String getPage(Model model){
 		model.addAttribute("modelPram","This is text from the server");
 		return "page";
-	}
-
-	@RequestMapping("testtwo")
-	public String testtwo(){
-		return "testtwo";
-	}
-
-	@RequestMapping("login")
-	public String login(){
-		return "login";
 	}
 
 }
