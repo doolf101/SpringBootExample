@@ -13,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.jndi.JndiObjectFactoryBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 
 import javax.naming.NamingException;
 import javax.sql.DataSource;
@@ -52,7 +54,7 @@ public class Application {
 	}
 
 	@Bean
-	public DataSource jndiDataSource() throws IllegalArgumentException, NamingException {
+	public DataSource jndiDataSource() throws NamingException {
 		JndiObjectFactoryBean bean = new JndiObjectFactoryBean();
 		bean.setJndiName("java:comp/env/jdbc/myDatasourceName");
 		bean.setProxyInterface(DataSource.class);
@@ -64,6 +66,11 @@ public class Application {
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public TokenStore tokenStore() throws NamingException {
+		return new JdbcTokenStore(jndiDataSource());
 	}
 
 }
